@@ -7,4 +7,12 @@ class Player
 		@score = 0
 	end
 
+	def adicionar_score
+		@score += 1
+	end
+
+	def subtrair_score
+		@score -= 1
+	end
+
 end

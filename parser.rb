@@ -19,8 +19,17 @@ class Parser
 			elsif linha_usuario?(f)
 				player = Player.new obter_usuario(f)
 				@jogos.last.players[player.name] = player
+
 			elsif linha_kill?(f)
 				@jogos.last.adicionar_kill
+				assasino = obter_assasino(f) 
+				vitima = obter_vitima(f)
+
+				if assasino != "<world>"
+					@jogos.last.players[assasino].adicionar_score
+				else 
+					@jogos.last.players[vitima].subtrair_score 
+				end
 			
 			end			
 		end
@@ -31,6 +40,16 @@ class Parser
 		def obter_usuario(linha)
 			linha.match(/((?<=n\\).*?(?=\\t))/)[0]
 		end
+
+		def obter_assasino(linha)
+			linha.match(/([^:]+).(?=\skilled)/)[0].strip
+		end
+
+
+		def obter_vitima(linha)
+			linha.match(/((?<=killed\s).*(?=\sby))/)[0]
+		end
+
 
 		def linha_novo_jogo?(linha)
 			linha.match(/(?:^|\W)InitGame(?:$|\W)/) ? true : false
@@ -58,5 +77,5 @@ parser = Parser.new
 
 parser.jogos.each do |j|
 	puts j.total_kills
-	puts j.players.map { |key, value| "Player: #{key}" }
+	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }
 end
