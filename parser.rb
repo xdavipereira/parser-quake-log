@@ -19,8 +19,10 @@ class Parser
 			elsif linha_usuario?(f)
 				player = Player.new obter_usuario(f)
 				@jogos.last.players[player.name] = player
-			end
+			elsif linha_kill?(f)
+				@jogos.last.adicionar_kill
 			
+			end			
 		end
 	end
 
@@ -55,5 +57,6 @@ end
 parser = Parser.new
 
 parser.jogos.each do |j|
+	puts j.total_kills
 	puts j.players.map { |key, value| "Player: #{key}" }
 end
