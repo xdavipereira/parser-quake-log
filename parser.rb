@@ -56,6 +56,8 @@ class Parser
 			jogo.players.map { |key,value| ranking[key] += value.score  }
 		end
 
+		ranking = ranking.sort_by { |key, value| value }.reverse!
+
 		puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
 		
 	end
