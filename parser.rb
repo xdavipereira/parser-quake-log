@@ -50,6 +50,16 @@ class Parser
 		end
 	end
 
+	def ranking_geral
+		ranking = Hash.new(0)
+		@jogos.each do |jogo|
+			jogo.players.map { |key,value| ranking[key] += value.score  }
+		end
+
+		puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
+		
+	end
+
 
 	private
 		def obter_usuario(linha)
@@ -90,7 +100,8 @@ end
 
 parser = Parser.new
 
-parser.ranking_jogo
+#parser.ranking_jogo
+parser.ranking_geral
 # parser.jogos.each do |j|
 # 	puts j.total_kills
 # 	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }
