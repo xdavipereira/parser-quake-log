@@ -21,9 +21,12 @@ class Parser
 				@jogos.last.players[player.name] = player
 
 			elsif linha_kill?(f)
-				@jogos.last.adicionar_kill
 				assasino = obter_assasino(f) 
 				vitima = obter_vitima(f)
+				motivo = causa_da_morte(f)
+				 
+				@jogos.last.adicionar_kill
+				@jogos.last.causas_das_mortes[motivo] += 1
 
 				if assasino != "<world>"
 					@jogos.last.players[assasino].adicionar_score
@@ -46,7 +49,8 @@ class Parser
 
 	def ranking_jogo
 		@jogos.each do |jogo|
-			 puts "Game #{jogo.id}:\n" + jogo.players.map { |key,value| "PLAYER: #{key} #{value.score} KILLS\n" }.join("") + "\n"
+			puts "Game #{jogo.id}:\n" + jogo.players.map { |key,value| "PLAYER: #{key} #{value.score} KILLS\n" }.join("") + "\n"
+		 	puts "Causas dos Abates:\n" + jogo.causas_das_mortes.map { |key, value|  "Motivo: #{key} #{value} vezes\n" }.join("") + "\n"		
 		end
 	end
 
@@ -77,6 +81,9 @@ class Parser
 			linha.match(/((?<=killed\s).*(?=\sby))/)[0]
 		end
 
+		def causa_da_morte(linha)
+			linha.match(/((?<=by\s).*)/)[0]
+		end
 
 		def linha_novo_jogo?(linha)
 			linha.match(/(?:^|\W)InitGame(?:$|\W)/) ? true : false
@@ -102,8 +109,8 @@ end
 
 parser = Parser.new
 
-#parser.ranking_jogo
-parser.ranking_geral
+parser.ranking_jogo
+#parser.ranking_geral
 # parser.jogos.each do |j|
 # 	puts j.total_kills
 # 	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }

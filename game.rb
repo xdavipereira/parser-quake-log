@@ -1,5 +1,5 @@
 class Game
-	attr_accessor :total_kills, :players
+	attr_accessor :total_kills, :players, :causas_das_mortes
 	attr_reader :id
 
 	@@id_jogo = 0
@@ -10,6 +10,8 @@ class Game
 		@total_kills = 0
 		
 		@players = Hash.new
+
+		@causas_das_mortes =  Hash.new(0)
 
 	end
 
