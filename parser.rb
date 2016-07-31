@@ -24,7 +24,7 @@ class Parser
 				assasino = obter_assasino(f) 
 				vitima = obter_vitima(f)
 				motivo = causa_da_morte(f)
-				 
+
 				@jogos.last.adicionar_kill
 				@jogos.last.causas_das_mortes[motivo] += 1
 
@@ -39,7 +39,7 @@ class Parser
 	end
 
 
-	def informacao_jogo(id)
+	def informacao_do_jogo(id)
 		jogo =  @jogos[id]
 		puts "Game_#{jogo.id} : {\n Total_kills: #{jogo.total_kills},\n "+
 		  "Players : #{jogo.players.keys }\n Kills: {\n" +
@@ -47,14 +47,14 @@ class Parser
 	end
 
 
-	def ranking_jogo
+	def relatorio_dos_jogos
 		@jogos.each do |jogo|
 			puts "Game #{jogo.id}:\n" + jogo.players.map { |key,value| "PLAYER: #{key} #{value.score} KILLS\n" }.join("") + "\n"
 		 	puts "Causas dos Abates:\n" + jogo.causas_das_mortes.map { |key, value|  "Motivo: #{key} #{value} vezes\n" }.join("") + "\n"		
 		end
 	end
 
-	def ranking_geral
+	def ranking_geral_de_abates
 		ranking = Hash.new(0)
 		@jogos.each do |jogo|
 			jogo.players.map { |key,value| ranking[key] += value.score  }
