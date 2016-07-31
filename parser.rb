@@ -44,6 +44,11 @@ class Parser
 	end
 
 
+	def ranking_jogo
+		@jogos.each do |jogo|
+			 puts "Game #{jogo.id}:\n" + jogo.players.map { |key,value| "PLAYER: #{key} #{value.score} KILLS\n" }.join("") + "\n"
+		end
+	end
 
 
 	private
@@ -85,7 +90,7 @@ end
 
 parser = Parser.new
 
-parser.informacao_jogo(1)
+parser.ranking_jogo
 # parser.jogos.each do |j|
 # 	puts j.total_kills
 # 	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }
