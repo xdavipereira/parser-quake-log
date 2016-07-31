@@ -5,7 +5,7 @@ class Game
 	@@id_jogo = 0
 
 	def initialize()
-		@id = @@id_jogo +=1
+		@id = @@id_jogo += 1
 
 		@total_kills = 0
 		
@@ -13,9 +13,8 @@ class Game
 
 	end
 
-
 	def adicionar_kill
-		@total_kills +=1
+		@total_kills += 1
 	end
 
 end

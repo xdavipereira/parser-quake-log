@@ -36,6 +36,16 @@ class Parser
 	end
 
 
+	def informacao_jogo(id)
+		jogo =  @jogos[id]
+		puts "Game_#{jogo.id} : {\n Total_kills: #{jogo.total_kills},\n "+
+		  "Players : #{jogo.players.keys }\n Kills: {\n" +
+		   jogo.players.map { |key,value| "  #{key} : #{value.score}\n " }.join("")+"\n }\n}"
+	end
+
+
+
+
 	private
 		def obter_usuario(linha)
 			linha.match(/((?<=n\\).*?(?=\\t))/)[0]
@@ -75,7 +85,8 @@ end
 
 parser = Parser.new
 
-parser.jogos.each do |j|
-	puts j.total_kills
-	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }
-end
+parser.informacao_jogo(1)
+# parser.jogos.each do |j|
+# 	puts j.total_kills
+# 	puts j.players.map { |key, value| "Player: #{key} #{value.score} Kills" }
+# end
