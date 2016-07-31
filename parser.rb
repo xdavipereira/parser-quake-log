@@ -1,13 +1,21 @@
+load 'game.rb'
+
 class Parser
+
+	attr_reader :jogos, :file
 	
 	def initialize
 
 		@file = File.open("games.log", "r")
 
+		@jogos = []
+
 		@file.each do |f|
 
 			if linha_novo_jogo?(f)
-				puts f + "\n"
+
+				@jogos << Game.new
+
 			end
 			
 		end
@@ -39,3 +47,7 @@ end
 
 
 parser = Parser.new
+
+parser.jogos.each do |j|
+	puts j.id
+end
