@@ -1,4 +1,5 @@
 load 'game.rb'
+load 'player.rb'
 
 class Parser
 
@@ -13,9 +14,11 @@ class Parser
 		@file.each do |f|
 
 			if linha_novo_jogo?(f)
-
 				@jogos << Game.new
 
+			elsif linha_usuario?(f)
+				player = Player.new obter_usuario(f)
+				@jogos.last.players[player.name] = player
 			end
 			
 		end
@@ -23,6 +26,9 @@ class Parser
 
 
 	private
+		def obter_usuario(linha)
+			linha.match(/((?<=n\\).*?(?=\\t))/)[0]
+		end
 
 		def linha_novo_jogo?(linha)
 			linha.match(/(?:^|\W)InitGame(?:$|\W)/) ? true : false
@@ -49,5 +55,5 @@ end
 parser = Parser.new
 
 parser.jogos.each do |j|
-	puts j.id
+	puts j.players.map { |key, value| "Player: #{key}" }
 end
