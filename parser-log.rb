@@ -5,9 +5,10 @@ load 'lib/parser.rb'
 	puts "================== PARSER LOG ==================="
 	puts "O que você deseja ver?"
 	puts "\n\n"
-	puts "Digite 1 para ver informções sobre determinado jogo."
-	puts "Digite 2 para ver o ranking de kills e as principais causas dos abates por jogo."
-	puts "Digite 3 para ver o ranking geral de kills dos players."
+	puts "Digite 1 para exibir as informções de determinado jogo."
+	puts "Digite 2 para exibir o relatorio de kills e causas dos abates por jogo."
+	puts "Digite 3 para exibir o ranking geral de kills dos players."
+	puts "Digite 4 para gerar o arquivo de relatorio dos jogos."
 
 	opcao = gets
 		
@@ -19,7 +20,7 @@ load 'lib/parser.rb'
 	case opcao.to_i
 
 	when 1
-		puts "Houveram #{parser.jogos.length} jogos, você deseja ver as informações de qual jogo?"
+		puts "Houve no total #{parser.jogos.length} jogos, você deseja ver as informações de qual jogo?"
 		puts "Escolha um numero entre 1 e #{parser.jogos.length}?"
 		jogo = gets
 

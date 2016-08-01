@@ -40,7 +40,15 @@ class Parser
 
 
 	def informacao_do_jogo(id)
-		jogo =  @jogos[id]
+
+		case id
+		when 1..@jogos.length
+			jogo = @jogos[id-1]
+		else
+			puts "Não existe informações para este jogo"
+			return 
+		end
+
 		puts "Game_#{jogo.id} : {\n Total_kills: #{jogo.total_kills},\n "+
 		  "Players : #{jogo.players.keys }\n Kills: {\n" +
 		   jogo.players.map { |key,value| "  #{key} : #{value.score}\n " }.join("")+"\n }\n}"
