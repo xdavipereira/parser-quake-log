@@ -55,12 +55,6 @@ loop do
 			puts "Até mais."
 			break
 		else
-		# puts %{Escolha uma das tres opções:
-		# '1' para informações de um determinado jogo.
-		# '2' para relatorio de kills e as causas dos abates por jogo.
-		# '3' para ranking geral de kills dos players.
-		# '4' para criar o arquivo de relatorio com todas as informações.
-		# '0' para finalizar a aplicação.}
 
 		puts "Opção invalida!\n"
 	end
