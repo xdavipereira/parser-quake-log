@@ -32,9 +32,12 @@ load 'lib/parser.rb'
 		parser.relatorio_dos_jogos
 	when 3
 		parser.ranking_geral_de_abates
+	when 4
+		parser.relatorio_geral
 	else
 		puts %{Escolha uma das tres opções:
 		'1' para informações de um determinado jogo.
-		'2' para ranking de kills e as causas dos abates por jogo.
-		'3' para ranking geral de kills dos players.}
+		'2' para relatorio de kills e as causas dos abates por jogo.
+		'3' para ranking geral de kills dos players.
+		'4' para criar o arquivo de relatorio com todas as informações.}
 	end

@@ -67,6 +67,28 @@ class Parser
 	end
 
 
+
+	def relatorio_geral
+		open('log/resultado.log', 'w') do |f|
+		
+			ranking = Hash.new(0)
+			@jogos.each do |jogo|
+				jogo.players.map { |key,value| ranking[key] += value.score  }
+			end
+
+			ranking = ranking.sort_by { |key, value| value }.reverse!
+			f.puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
+
+			@jogos.each do |jogo|
+				f.puts "Game #{jogo.id}:\n" + jogo.players.map { |key,value| "PLAYER: #{key} #{value.score} KILLS\n" }.join("") + "\n"
+			 	f.puts "Causas dos Abates:\n" + jogo.causas_das_mortes.map { |key, value|  "Motivo: #{key} #{value} vezes\n" }.join("") + "\n"		
+			end
+		end
+
+		puts "O arquivo 'resultado.log' contendo o relatorio foi criado no diretorio 'log'" 
+	end
+
+
 	private
 		def obter_usuario(linha)
 			linha.match(/((?<=n\\).*?(?=\\t))/)[0]
