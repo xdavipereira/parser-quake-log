@@ -25,7 +25,7 @@ Ao iniciar a aplicação, um menu de opções é exibido, com as instruções pa
 
 ### Informações sobre um jogo
 
-```ruby 
+```
 Game_3 : {
  Total_kills: 4,
  Players : ["Dono da Bola", "Mocinha", "Isgalamido", "Zeh"]
@@ -41,7 +41,7 @@ Game_3 : {
 
 ### Relatorio de kills e causas dos abates
 
-```ruby
+```
 Game 3:
 PLAYER: Dono da Bola -1 KILLS
 PLAYER: Mocinha 0 KILLS
@@ -56,7 +56,7 @@ Motivo: MOD_FALLING 1 vezes
 
 
 ###Ranking geral dos players
-```ruby
+```
 RANKING:
 PLAYER: Isgalamido 150 KILLS
 PLAYER: Zeh 124 KILLS
