@@ -51,9 +51,7 @@ class Parser
 			return 
 		end
 
-		puts "Game_#{jogo.id} : {\n Total_kills: #{jogo.total_kills},\n "+
-		  "Players : #{jogo.players.keys }\n Kills: {\n" +
-		   jogo.players.map { |key,value| "  #{key} : #{value.score}\n " }.join("")+"\n }\n}"
+		puts jogo
 	end
 
 
@@ -86,7 +84,7 @@ class Parser
 			end
 
 			ranking = ordenar_valores(ranking)
-			
+
 			f.puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
 
 			@jogos.each do |jogo|

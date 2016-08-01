@@ -19,4 +19,10 @@ class Game
 		@total_kills += 1
 	end
 
+	def to_s
+		"Game_#{@id} : {\n Total_kills: #{@total_kills},\n "+
+		  "Players : #{@players.keys }\n Kills: {\n" +
+		   @players.map { |key,value| "  #{key} : #{value.score}\n " }.join("")+"\n }\n}"
+	end
+
 end
