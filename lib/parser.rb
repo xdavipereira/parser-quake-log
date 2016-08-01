@@ -15,10 +15,13 @@ class Parser
 
 			if linha_novo_jogo?(f)
 				@jogos << Game.new
+				next
+
 
 			elsif linha_usuario?(f)
 				player = Player.new obter_usuario(f)
 				@jogos.last.players[player.name] = player
+				next
 
 			elsif linha_kill?(f)
 				assasino = obter_assasino(f) 
@@ -33,7 +36,6 @@ class Parser
 				else 
 					@jogos.last.players[vitima].subtrair_score 
 				end
-			
 			end			
 		end
 	end
@@ -68,12 +70,11 @@ class Parser
 			jogo.players.map { |key,value| ranking[key] += value.score  }
 		end
 
-		ranking = ranking.sort_by { |key, value| value }.reverse!
+		ranking = ordenar_valores(ranking)
 
 		puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
 		
 	end
-
 
 
 	def relatorio_geral
@@ -84,7 +85,8 @@ class Parser
 				jogo.players.map { |key,value| ranking[key] += value.score  }
 			end
 
-			ranking = ranking.sort_by { |key, value| value }.reverse!
+			ranking = ordenar_valores(ranking)
+			
 			f.puts "RANKING:\n" + ranking.map { |key, value| "PLAYER: #{key} #{value} KILLS\n" }.join("") + "\n"
 
 			@jogos.each do |jogo|
@@ -96,6 +98,10 @@ class Parser
 		puts "O arquivo 'resultado.log' contendo o relatorio foi criado no diretorio 'log'" 
 	end
 
+
+	def ordenar_valores(hash)
+		hash.sort_by { |key, value| value }.reverse
+	end
 
 	private
 		def obter_usuario(linha)

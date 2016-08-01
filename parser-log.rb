@@ -9,7 +9,7 @@ load 'lib/parser.rb'
 	def exibe_informacao?
 		puts "Deseja ver mais alguma informação? (S/N)"
 		decisao = gets.strip
-		decisao.upcase == "S" ? true : false
+		exibir = decisao.upcase == "N"
 	end
 
 loop do
@@ -38,28 +38,30 @@ loop do
 
 			puts "Informações sobre o jogo #{jogo.to_i}"
 			parser.informacao_do_jogo(jogo.to_i)
-			break !exibe_informacao?
+			break if exibe_informacao?
 
 		when 2
 			parser.relatorio_dos_jogos
-			break !exibe_informacao?
+			break if exibe_informacao?
 
 		when 3
 			parser.ranking_geral_de_abates
-			break !exibe_informacao?
+			break if exibe_informacao?
 
 		when 4
 			parser.relatorio_geral
-			break !exibe_informacao?
+			break if exibe_informacao?
 		when 0
+			puts "Até mais."
 			break
 		else
-		puts %{Escolha uma das tres opções:
-		'1' para informações de um determinado jogo.
-		'2' para relatorio de kills e as causas dos abates por jogo.
-		'3' para ranking geral de kills dos players.
-		'4' para criar o arquivo de relatorio com todas as informações.
-		'0' para finalizar a aplicação.}
-			break !exibe_informacao?
+		# puts %{Escolha uma das tres opções:
+		# '1' para informações de um determinado jogo.
+		# '2' para relatorio de kills e as causas dos abates por jogo.
+		# '3' para ranking geral de kills dos players.
+		# '4' para criar o arquivo de relatorio com todas as informações.
+		# '0' para finalizar a aplicação.}
+
+		puts "Opção invalida!\n"
 	end
 end
